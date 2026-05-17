@@ -4,13 +4,13 @@
       "id": "1",
       "name": "Speed Runner Elite",
       "category": "Running",
-      "price": 3500000,
+      "price": 2500000,
       "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800",
       "sizes": [
         29,
         31
       ],
-      "description": "Được mệnh danh là 'đôi cánh của đôi chân', Speed Runner Elite sở hữu công nghệ đệm khí Carbon giúp hoàn trả 90% năng lượng trong mỗi bước chạy."
+      "description": "Được mệnh danh là 'đôi cánh của đôi chân', Speed Runner Elite sở hữu công nghệ đệm khí Carbon giúp hoàn trả 90% năng lượng trong mỗi bước chạy. Phù hợp cho những ai muốn chinh phục kỷ lục cá nhân mới."
     },
     {
       "id": "2",
@@ -22,7 +22,7 @@
         29,
         31
       ],
-      "description": "Sự giao thoa hoàn hảo giữa phong cách đường phố và hiệu năng thể thao."
+      "description": "Sự giao thoa hoàn hảo giữa phong cách đường phố và hiệu năng thể thao. Urban Flex 360 mang lại cảm giác thoải mái tuyệt đối cho cả ngày dài di chuyển mà vẫn giữ được vẻ ngoài thời thượng."
     },
     {
       "id": "3",
@@ -34,7 +34,7 @@
         29,
         31
       ],
-      "description": "Chinh phục những cung đường khắc nghiệt nhất với đế cao su gai địa hình siêu bám."
+      "description": "Chinh phục những cung đường khắc nghiệt nhất với đế cao su gai địa hình siêu bám. Trail Master Pro là người bạn đồng hành tin cậy cho những chuyến trekking xuyên rừng hay leo núi đá."
     },
     {
       "id": "4",
@@ -48,7 +48,7 @@
         35,
         41
       ],
-      "description": "Thiết kế cổ cao hỗ trợ cổ chân tối đa cùng lớp phủ chống thấm Gore-Tex."
+      "description": "Thiết kế cổ cao hỗ trợ cổ chân tối đa cùng lớp phủ chống thấm Gore-Tex. Summit Peak Hiker bảo vệ đôi chân bạn khô ráo trong mọi điều kiện thời tiết, giúp bạn chạm đến đỉnh cao dễ dàng hơn."
     },
     {
       "id": "5",
@@ -62,7 +62,7 @@
         35,
         41
       ],
-      "description": "Phiên bản giới hạn dành cho những tín đồ của bóng đêm với họa tiết phản quang độc quyền."
+      "description": "Phiên bản giới hạn dành cho những tín đồ của bóng đêm. Với họa tiết phản quang 3M độc quyền, bạn sẽ luôn là tâm điểm của mọi ánh nhìn dưới ánh đèn đường. Đẳng cấp và sự độc bản nằm ở đây."
     }
   ],
   "users": [
@@ -70,68 +70,27 @@
       "id": "1",
       "username": "admin",
       "password": "123",
-      "name": "Admin Manager",
-      "email": "admin@sneakerx.com"
+      "role": "admin"
     },
     {
       "name": "Huy",
       "email": "huyanh052222@gmail.com",
+      "phone": "0987654321",
       "username": "Huy",
       "password": "123123",
-      "id": "RY4vbhZd5-U"
-    },
-    {
-      "name": "Huy Lý",
-      "email": "huyanh052222@gmail.com",
-      "username": "123123",
-      "password": "123123",
-      "id": "VOnFYAgG8c8"
+      "id": "a9-1JIFz_iA"
     }
   ],
-  "orders": [
+  "orders": [],
+  "bookings": [
     {
-      "userId": "1",
-      "items": [
-        {
-          "id": 1779014231301.6943,
-          "name": "Urban Flex 360",
-          "price": 1800000,
-          "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&q=80&w=800",
-          "size": "31"
-        }
-      ],
-      "total": 1800000,
-      "date": "2026-05-17T10:40:21.674Z",
-      "id": "rPMdAhzOBQk"
-    },
-    {
-      "userId": "RY4vbhZd5-U",
-      "items": [
-        {
-          "id": 1779015704598.5579,
-          "name": "Speed Runner Elite",
-          "price": 3500000,
-          "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800",
-          "size": "31"
-        },
-        {
-          "id": 1779017096800.5542,
-          "name": "Speed Runner Elite",
-          "price": 3500000,
-          "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800",
-          "size": "31"
-        },
-        {
-          "id": 1779017102710.6614,
-          "name": "Urban Flex 360",
-          "price": 1800000,
-          "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&q=80&w=800",
-          "size": "31"
-        }
-      ],
-      "total": 8800000,
-      "date": "2026-05-17T11:29:13.313Z",
-      "id": "ZtmNKbFJeHY"
+      "name": "AAA",
+      "phone": "0768765123",
+      "date": "2322-03-12",
+      "style": "Outdoor",
+      "status": "pending",
+      "createdAt": "2026-05-17T12:54:49.468Z",
+      "id": "Q_fuk8NnUDA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
