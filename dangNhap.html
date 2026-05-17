@@ -4,31 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNEAKER X - Đăng nhập</title>
+    <link rel="stylesheet" href="./dangNhap.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg-color: #ffffff; --text-color: #1a1a1a; --secondary-bg: #f5f5f7; }
-        [data-theme="dark"] { --bg-color: #050505; --text-color: #f5f5f7; --secondary-bg: #151515; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: var(--bg-color); color: var(--text-color); display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; transition: 0.3s; position: relative; }
-        
-        .btn-back { position: absolute; top: 40px; left: 5%; text-decoration: none; color: var(--text-color); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px; opacity: 0.6; transition: 0.3s; }
-        .btn-back:hover { opacity: 1; transform: translateX(-5px); }
-
-        .auth-card { background: var(--bg-color); border: 1px solid rgba(128,128,128,0.1); padding: 50px; border-radius: 30px; width: 100%; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
-        .logo { font-weight: 800; font-size: 1.5rem; text-align: center; margin-bottom: 30px; display: block; text-decoration: none; color: var(--text-color); }
-        h2 { font-size: 1.5rem; margin-bottom: 30px; text-align: center; }
-        .form-group { margin-bottom: 20px; position: relative; }
-        label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; opacity: 0.7; }
-        input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(128,128,128,0.2); background: var(--secondary-bg); color: var(--text-color); outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--text-color); }
-        input.error { border-color: #ff4444; background: rgba(255, 68, 68, 0.05); }
-        
-        .btn-submit { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--text-color); color: var(--bg-color); font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        .btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
-        .switch-auth { text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.7; }
-        .switch-auth a { color: var(--text-color); font-weight: 700; text-decoration: none; }
-        #message { margin-top: 15px; text-align: center; font-size: 0.85rem; padding: 10px; border-radius: 8px; display: none; font-weight: 600; }
-    </style>
+    <script defer src="./main.js"></script>
 </head>
 <body>
     <a href="index.html" class="btn-back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Quay về</a>
@@ -45,72 +23,5 @@
         <div class="switch-auth">Chưa có tài khoản? <a href="dangKy.html">Đăng ký ngay</a></div>
     </div>
 
-    <script>
-        const showMsg = (text, type) => {
-            const msg = document.getElementById('message');
-            msg.style.display = 'block';
-            msg.style.color = type === 'error' ? '#ff4444' : '#00c851';
-            msg.style.background = type === 'error' ? 'rgba(255, 68, 68, 0.1)' : 'rgba(0, 200, 81, 0.1)';
-            msg.innerText = text;
-        };
-
-        const clearErrors = () => { document.querySelectorAll('input').forEach(i => i.classList.remove('error')); };
-
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            clearErrors();
-            
-            const uInput = document.getElementById('username');
-            const pInput = document.getElementById('password');
-            const u = uInput.value.trim();
-            const p = pInput.value;
-
-            // Form Validation
-            if (!u) { uInput.classList.add('error'); return showMsg("Vui lòng nhập tên đăng nhập!", "error"); }
-            if (p.length < 3) { pInput.classList.add('error'); return showMsg("Mật khẩu không hợp lệ!", "error"); }
-
-            try {
-                const response = await fetch(`http://localhost:3000/users?username=${encodeURIComponent(u)}`);
-                const data = await response.json();
-
-                if (data.length > 0) {
-                    if (data[0].password === p) {
-                        localStorage.setItem('isLoggedIn', 'true');
-                        localStorage.setItem('user', JSON.stringify({ ...data[0], name: data[0].name || data[0].username }));
-                        showMsg("Đăng nhập thành công!", "success");
-                        setTimeout(() => window.location.href = 'index.html', 1000);
-                    } else {
-                        pInput.classList.add('error');
-                        showMsg("Sai mật khẩu, vui lòng thử lại!", "error");
-                    }
-                } else {
-                    const localUsers = JSON.parse(localStorage.getItem('local_users')) || [];
-                    const found = localUsers.find(user => user.username === u);
-                    if (found && found.password === p) {
-                        localStorage.setItem('isLoggedIn', 'true');
-                        localStorage.setItem('user', JSON.stringify({ ...found, name: found.name || found.username }));
-                        window.location.href = 'index.html';
-                    } else if (u === 'admin' && p === '123') { 
-                        localStorage.setItem('isLoggedIn', 'true');
-                        localStorage.setItem('user', JSON.stringify({ name: 'Admin Manager', username: 'admin', role: 'admin' }));
-                        window.location.href = 'index.html';
-                    } else {
-                        uInput.classList.add('error');
-                        showMsg("Tài khoản không tồn tại!", "error");
-                    }
-                }
-            } catch (err) {
-                if (u === 'admin' && p === '123') { 
-                    localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('user', JSON.stringify({ name: 'Admin Manager', username: 'admin', role: 'admin' }));
-                    window.location.href = 'index.html';
-                } else {
-                    showMsg("Lỗi kết nối Server!", "error");
-                }
-            }
-        });
-
-        if (localStorage.getItem('theme') === 'dark') document.body.setAttribute('data-theme', 'dark');
-    </script>
 </body>
 </html>

@@ -4,85 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNEAKER X - Hồ sơ cá nhân</title>
+    <link rel="stylesheet" href="./nguoiDung.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg-color: #ffffff; --bg-rgb: 255, 255, 255; --text-color: #1a1a1a; --accent-color: #1a1a1a; --secondary-bg: #f5f5f7; --card-bg: #ffffff; --header-blur: 40px; --header-opacity: 0.5; --border-color: rgba(128,128,128,0.15); --modal-bg: rgba(255,255,255,0.95); }
-        [data-theme="dark"] { --bg-color: #050505; --bg-rgb: 5, 5, 5; --text-color: #f5f5f7; --accent-color: #f5f5f7; --secondary-bg: #151515; --card-bg: #121212; --border-color: rgba(255,255,255,0.08); --modal-bg: rgba(20,20,20,0.95); }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); transition: 0.4s; min-height: 100vh; display: flex; flex-direction: column; }
-
-        header { height: 70px; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; position: fixed; top: 0; width: 100%; z-index: 2000; background: rgba(var(--bg-rgb), var(--header-opacity)); backdrop-filter: blur(var(--header-blur)) saturate(180%); border-bottom: 1px solid var(--border-color); }
-        .logo { font-weight: 800; font-size: 1.3rem; letter-spacing: -1px; text-transform: uppercase; text-decoration: none; color: var(--text-color); }
-        nav ul { display: flex; list-style: none; gap: 25px; }
-        nav ul li a { text-decoration: none; color: var(--text-color); font-weight: 500; font-size: 0.85rem; opacity: 0.7; transition: 0.3s; }
-        .header-right { display: flex; align-items: center; gap: 15px; }
-        .auth-buttons { display: flex; align-items: center; gap: 10px; }
-        .btn-auth { text-decoration: none; font-size: 0.8rem; font-weight: 600; cursor: pointer; color: var(--text-color); }
-        .btn-register { background: var(--accent-color); color: var(--bg-color); padding: 8px 16px; border-radius: 18px; transition: 0.3s; border: none; cursor: pointer; font-size: 0.8rem; font-weight: 600; text-decoration: none;}
-        .theme-toggle { background: none; border: none; cursor: pointer; color: var(--text-color); display: flex; align-items: center; justify-content: center; }
-        .sun-icon { display: none; } [data-theme="dark"] .sun-icon { display: block; } [data-theme="dark"] .moon-icon { display: none; }
-
-        main { flex: 1; padding: 120px 5% 80px; max-width: 900px; margin: 0 auto; width: 100%; }
-        .page-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px; }
-        .page-desc { opacity: 0.6; font-size: 0.95rem; margin-bottom: 40px; }
-        
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group.full-width { grid-column: span 2; }
-        label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; opacity: 0.7; }
-        input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--secondary-bg); color: var(--text-color); outline: none; transition: 0.3s; font-size: 0.95rem; }
-        input:focus { border-color: var(--accent-color); background: var(--bg-color); }
-        input:disabled { opacity: 0.5; cursor: not-allowed; }
-        input.error { border-color: #ff4444; background: rgba(255, 68, 68, 0.05); }
-
-        .btn-group { display: flex; gap: 15px; align-items: center; margin-top: 10px; }
-        .btn-save { background: var(--accent-color); color: var(--bg-color); border: none; padding: 14px 35px; border-radius: 30px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 0.85rem; }
-        .btn-save:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        #msg-box { padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 0.9rem; font-weight: 600; display: none; }
-
-        /* ADMIN PANEL CSS - USERS */
-        #admin-panel { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border-color); display: none; }
-        .admin-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: #00c851; }
-        .user-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-        .user-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 16px; position: relative; }
-        .u-role { position: absolute; top: 15px; right: 15px; font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 10px; background: var(--secondary-bg); text-transform: uppercase;}
-        .u-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
-        .u-meta { font-size: 0.85rem; opacity: 0.7; margin-bottom: 5px; }
-        .u-actions { margin-top: 15px; display: flex; gap: 10px; }
-        .btn-sm { flex: 1; padding: 8px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.8rem; }
-        .btn-edit { background: var(--secondary-bg); color: var(--text-color); }
-        .btn-del { background: rgba(255,68,68,0.1); color: #ff4444; }
-
-        /* ADMIN PANEL CSS - BOOKINGS */
-        #admin-booking-panel { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--border-color); display: none; }
-        .booking-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: #33b5e5; }
-        .booking-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .booking-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 16px; position: relative; transition: 0.3s; }
-        .booking-card.read { opacity: 0.6; }
-        .b-date { font-weight: 700; color: #33b5e5; margin-bottom: 8px; font-size: 0.9rem;}
-        .b-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
-        .btn-check { position: absolute; top: 15px; right: 15px; background: rgba(0,200,81,0.1); color: #00c851; border: 1px solid rgba(0,200,81,0.2); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 1rem;}
-        .btn-check:hover { background: #00c851; color: white; }
-
-        /* ADMIN EDIT MODAL */
-        .admin-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 3000; display: none; align-items: center; justify-content: center; }
-        .admin-modal.active { display: flex; }
-        .modal-box { background: var(--card-bg); padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; border: 1px solid var(--border-color); }
-        .modal-box h3 { margin-bottom: 20px; }
-
-        footer { background: var(--secondary-bg); padding: 80px 5% 40px; border-top: 1px solid rgba(128, 128, 128, 0.1); color: var(--text-color); margin-top: auto; }
-        .footer-container { max-width: 1400px; margin: 0 auto; }
-        .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(128, 128, 128, 0.1); }
-        .footer-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-        .footer-col h4 { font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; }
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .footer-col ul li a { text-decoration: none; color: var(--text-color); font-size: 0.85rem; opacity: 0.6; }
-        .footer-bottom { padding-top: 40px; display: flex; justify-content: space-between; align-items: center; }
-        .social-links { display: flex; gap: 15px; }
-        .social-link { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(128, 128, 128, 0.2); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-color); font-size: 0.75rem; font-weight: 600; }
-
-        @media (max-width: 768px) { nav, .header-right .auth-buttons { display: none !important; } .footer-top, .form-grid { grid-template-columns: 1fr; } }
-    </style>
+    <script defer src="./main.js"></script>
 </head>
 <body>
 
@@ -91,20 +15,38 @@
         <nav><ul><li><a href="index.html">Trang chủ</a></li><li><a href="sanPham.html">Sản phẩm</a></li></ul></nav>
         <div class="header-right">
             <div class="auth-buttons" id="auth-buttons">
-                <a href="dangNhap.html" class="btn-auth">Đăng nhập</a>
-                <a href="dangKy.html" class="btn-register">Đăng ký</a>
+                <!-- Nội dung sẽ được render bởi JS -->
             </div>
-            <a href="gioHang.html" class="theme-toggle" style="text-decoration: none; margin-left: 10px;">
+            
+            <a href="gioHang.html" class="theme-toggle cart-link">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
             </a>
-            <button class="theme-toggle" id="theme-btn" style="margin-left: 10px;">
+            
+            <button class="theme-toggle" id="theme-btn">
                 <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
                 <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/></svg>
             </button>
+
+            <div class="hamburger" id="hamburger-btn">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </header>
 
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="sanPham.html">Sản phẩm</a></li>
+            <li><a href="gioHang.html">Giỏ hàng</a></li>
+        </ul>
+        <div class="auth-buttons" id="mobile-auth-buttons">
+            <!-- Nội dung sẽ được render bởi JS -->
+        </div>
+    </div>
+
     <main>
+        <!-- PROFILE SECTION CƠ BẢN -->
         <h1 class="page-title">Hồ sơ cá nhân</h1>
         <p class="page-desc">Quản lý thông tin bảo mật và các thiết lập tài khoản của bạn.</p>
 
@@ -117,20 +59,26 @@
                     <div class="form-group"><label>Số điện thoại</label><input type="tel" id="phone" required placeholder="09xxxxxxxx"></div>
                     <div class="form-group full-width"><label>Email</label><input type="email" id="email" required></div>
                 </div>
-                <div class="btn-group"><button type="submit" class="btn-save">LƯU THAY ĐỔI</button></div>
+                <div class="btn-group">
+                    <button type="submit" class="btn-save">LƯU THAY ĐỔI</button>
+                </div>
             </form>
         </section>
 
         <!-- KHU VỰC QUẢN LÝ USER CỦA ADMIN -->
         <section id="admin-panel">
             <h2 class="admin-title">Quản lý Thành viên</h2>
-            <div class="user-grid" id="admin-user-grid"></div>
+            <div class="user-grid" id="admin-user-grid">
+                <!-- Nội dung render qua JS -->
+            </div>
         </section>
 
         <!-- KHU VỰC QUẢN LÝ ĐẶT LỊCH CỦA ADMIN -->
         <section id="admin-booking-panel">
             <h2 class="booking-title">Quản lý Lịch Tư Vấn</h2>
-            <div class="booking-grid" id="admin-booking-grid"></div>
+            <div class="booking-grid" id="admin-booking-grid">
+                <!-- Nội dung render qua JS -->
+            </div>
         </section>
     </main>
 
@@ -141,9 +89,9 @@
             <div class="form-group"><label>Tên</label><input type="text" id="edit-name"></div>
             <div class="form-group"><label>SĐT</label><input type="text" id="edit-phone"></div>
             <div class="form-group"><label>Email</label><input type="text" id="edit-email"></div>
-            <div class="btn-group" style="justify-content: flex-end;">
+            <div class="btn-group btn-group-right">
                 <button onclick="closeAdminModal()" class="btn-sm btn-edit">HỦY</button>
-                <button onclick="saveAdminEdit()" class="btn-sm btn-save" style="padding: 10px 20px;">LƯU</button>
+                <button onclick="saveAdminEdit()" class="btn-sm btn-save btn-save-modal">LƯU</button>
             </div>
         </div>
     </div>
@@ -164,197 +112,5 @@
         </div>
     </footer>
 
-    <script>
-        const checkAuth = () => {
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            let user = null; try { user = JSON.parse(localStorage.getItem('user')); } catch(e){}
-            if (!isLoggedIn || !user) { window.location.href = 'dangNhap.html'; return; }
-
-            const authDiv = document.getElementById('auth-buttons');
-            authDiv.innerHTML = `
-                <a href="nguoiDung.html" class="btn-auth" style="margin-right: 15px;">Xin chào, ${user.name || user.username}</a>
-                <button onclick="logout()" class="btn-auth" style="color: #ff4444; border:none; background:none;">Đăng xuất</button>
-            `;
-
-            // Hiển thị Admin Panel nếu là admin
-            if(user.role === 'admin' || user.username === 'admin') {
-                document.getElementById('admin-panel').style.display = 'block';
-                document.getElementById('admin-booking-panel').style.display = 'block';
-                loadAllUsers();
-                loadAllBookings();
-            }
-        };
-
-        window.logout = () => { if(confirm("Đăng xuất khỏi tài khoản?")) { localStorage.setItem('isLoggedIn', 'false'); localStorage.removeItem('user'); window.location.href = 'index.html'; } };
-
-        let currentDbUserId = null; 
-        async function loadProfileData() {
-            let localUser = JSON.parse(localStorage.getItem('user'));
-            try {
-                const res = await fetch(`http://localhost:3000/users?username=${localUser.username}`);
-                if (!res.ok) throw new Error();
-                const data = await res.json();
-                if(data.length > 0) {
-                    const dbUser = data[0]; currentDbUserId = dbUser.id; 
-                    document.getElementById('username').value = dbUser.username;
-                    document.getElementById('name').value = dbUser.name || '';
-                    document.getElementById('phone').value = dbUser.phone || '';
-                    document.getElementById('email').value = dbUser.email || '';
-                    localStorage.setItem('user', JSON.stringify(dbUser));
-                }
-            } catch (err) {
-                document.getElementById('username').value = localUser.username;
-                document.getElementById('name').value = localUser.name || '';
-                document.getElementById('phone').value = localUser.phone || '';
-                document.getElementById('email').value = localUser.email || '';
-            }
-        }
-
-        const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        const validatePhone = (phone) => /^(0[3|5|7|8|9])+([0-9]{8})$/.test(phone);
-
-        document.getElementById('profileForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const msgBox = document.getElementById('msg-box');
-            const inputs = [document.getElementById('name'), document.getElementById('phone'), document.getElementById('email')];
-            inputs.forEach(i => i.classList.remove('error'));
-
-            const nName = inputs[0].value.trim();
-            const nPhone = inputs[1].value.trim();
-            const nEmail = inputs[2].value.trim();
-
-            if(!nName) { inputs[0].classList.add('error'); return; }
-            if(!validatePhone(nPhone)) { inputs[1].classList.add('error'); return; }
-            if(nEmail && !validateEmail(nEmail)) { inputs[2].classList.add('error'); return; }
-
-            try {
-                if(currentDbUserId) {
-                    const res = await fetch(`http://localhost:3000/users/${currentDbUserId}`, {
-                        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ name: nName, phone: nPhone, email: nEmail })
-                    });
-                    if (!res.ok) throw new Error();
-                    
-                    msgBox.style.display = 'block'; msgBox.style.background = 'rgba(0, 200, 81, 0.1)'; msgBox.style.color = '#00c851';
-                    msgBox.innerText = "Cập nhật thành công!";
-                    let user = JSON.parse(localStorage.getItem('user'));
-                    user.name = nName; user.phone = nPhone; user.email = nEmail;
-                    localStorage.setItem('user', JSON.stringify(user));
-                    checkAuth(); // Update Header
-                }
-            } catch (err) { msgBox.style.display = 'block'; msgBox.style.color = '#ffbb33'; msgBox.innerText = "Đã lưu (Offline)."; }
-            setTimeout(() => { msgBox.style.display = 'none'; }, 3000);
-        });
-
-        // ======= ADMIN LOGIC - USERS =======
-        let editingUserId = null;
-        async function loadAllUsers() {
-            try {
-                const res = await fetch('http://localhost:3000/users');
-                if (!res.ok) throw new Error();
-                const users = await res.json();
-                const grid = document.getElementById('admin-user-grid');
-                grid.innerHTML = users.map(u => `
-                    <div class="user-card">
-                        <span class="u-role" style="color: ${u.role==='admin'?'#00c851':'inherit'}">${u.role || 'user'}</span>
-                        <div class="u-name">${u.name || u.username}</div>
-                        <div class="u-meta">@${u.username}</div>
-                        <div class="u-meta">SĐT: ${u.phone || 'N/A'}</div>
-                        <div class="u-meta">${u.email || 'N/A'}</div>
-                        <div class="u-actions">
-                            <button onclick="openAdminEdit('${u.id}', '${u.name}', '${u.phone}', '${u.email}')" class="btn-sm btn-edit">Sửa</button>
-                            <button onclick="deleteUser('${u.id}', '${u.username}')" class="btn-sm btn-del">Xóa</button>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (e) { console.warn("Lỗi tải users"); }
-        }
-
-        async function deleteUser(id, username) {
-            if(username === 'admin') return alert("Không thể xóa Admin gốc!");
-            if(confirm(`Bạn có chắc muốn xóa @${username}?`)) {
-                try {
-                    await fetch(`http://localhost:3000/users/${id}`, { method: 'DELETE' });
-                    loadAllUsers();
-                } catch(e) { alert("Lỗi kết nối API"); }
-            }
-        }
-
-        window.openAdminEdit = (id, name, phone, email) => {
-            editingUserId = id;
-            document.getElementById('edit-name').value = name !== 'undefined' ? name : '';
-            document.getElementById('edit-phone').value = phone !== 'undefined' ? phone : '';
-            document.getElementById('edit-email').value = email !== 'undefined' ? email : '';
-            document.getElementById('admin-modal').classList.add('active');
-        };
-        window.closeAdminModal = () => document.getElementById('admin-modal').classList.remove('active');
-
-        window.saveAdminEdit = async () => {
-            const name = document.getElementById('edit-name').value;
-            const phone = document.getElementById('edit-phone').value;
-            const email = document.getElementById('edit-email').value;
-            try {
-                await fetch(`http://localhost:3000/users/${editingUserId}`, {
-                    method: 'PATCH', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, phone, email })
-                });
-                closeAdminModal();
-                loadAllUsers();
-            } catch(e) { alert("Lỗi kết nối"); }
-        };
-
-        // ======= ADMIN LOGIC - BOOKINGS =======
-        async function loadAllBookings() {
-            let bookings = [];
-            try {
-                const res = await fetch('http://localhost:3000/bookings');
-                if(!res.ok) throw new Error();
-                bookings = await res.json();
-            } catch(e) {
-                bookings = JSON.parse(localStorage.getItem('local_bookings')) || [];
-            }
-
-            const grid = document.getElementById('admin-booking-grid');
-            if(bookings.length === 0) {
-                grid.innerHTML = '<p style="opacity:0.6;">Chưa có lịch hẹn nào.</p>';
-                return;
-            }
-
-            grid.innerHTML = bookings.map(b => `
-                <div class="booking-card ${b.status === 'read' ? 'read' : ''}" id="booking-${b.id}">
-                    <div class="b-date">📅 ${b.date}</div>
-                    <div class="b-name">${b.name}</div>
-                    <div class="u-meta">📞 ${b.phone}</div>
-                    <div class="u-meta">👟 Phong cách: ${b.style}</div>
-                    ${b.status !== 'read' ? `<button class="btn-check" onclick="markBookingRead('${b.id}')" title="Đánh dấu đã xem">✓</button>` : '<span style="position:absolute; top:15px; right:15px; color:#00c851; font-size:0.8rem; font-weight:bold;">Đã xem</span>'}
-                </div>
-            `).join('');
-        }
-
-        window.markBookingRead = async (id) => {
-            try {
-                const res = await fetch(`http://localhost:3000/bookings/${id}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ status: 'read' })
-                });
-                if(!res.ok) throw new Error();
-            } catch(e) {
-                let localBookings = JSON.parse(localStorage.getItem('local_bookings')) || [];
-                let bIndex = localBookings.findIndex(b => b.id == id);
-                if(bIndex > -1) {
-                    localBookings[bIndex].status = 'read';
-                    localStorage.setItem('local_bookings', JSON.stringify(localBookings));
-                }
-            }
-            loadAllBookings(); // Tải lại giao diện Grid Booking
-        };
-
-        const applyTheme = (theme) => { if (theme === 'dark') document.body.setAttribute('data-theme', 'dark'); else document.body.removeAttribute('data-theme'); };
-        applyTheme(localStorage.getItem('theme'));
-        document.getElementById('theme-btn').addEventListener('click', () => { const isDark = document.body.getAttribute('data-theme') === 'dark'; const next = isDark ? 'light' : 'dark'; applyTheme(next); localStorage.setItem('theme', next); });
-
-        window.onload = () => { checkAuth(); loadProfileData(); };
-    </script>
 </body>
 </html>

@@ -4,30 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNEAKER X - Đăng ký</title>
+    <link rel="stylesheet" href="./dangKy.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg-color: #ffffff; --text-color: #1a1a1a; --secondary-bg: #f5f5f7; }
-        [data-theme="dark"] { --bg-color: #050505; --text-color: #f5f5f7; --secondary-bg: #151515; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: var(--bg-color); color: var(--text-color); display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; transition: 0.3s; position: relative; }
-        
-        .btn-back { position: absolute; top: 40px; left: 5%; text-decoration: none; color: var(--text-color); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px; opacity: 0.6; transition: 0.3s; }
-        .btn-back:hover { opacity: 1; transform: translateX(-5px); }
-
-        .auth-card { background: var(--bg-color); border: 1px solid rgba(128,128,128,0.1); padding: 50px; border-radius: 30px; width: 100%; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
-        .logo { font-weight: 800; font-size: 1.5rem; text-align: center; margin-bottom: 30px; display: block; text-decoration: none; color: var(--text-color); }
-        h2 { font-size: 1.5rem; margin-bottom: 30px; text-align: center; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; opacity: 0.7; }
-        input { width: 100%; padding: 12px 15px; border-radius: 12px; border: 1px solid rgba(128,128,128,0.2); background: var(--secondary-bg); color: var(--text-color); outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--text-color); }
-        input.error { border-color: #ff4444; background: rgba(255, 68, 68, 0.05); }
-        .btn-submit { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--text-color); color: var(--bg-color); font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        .btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
-        .switch-auth { text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.7; }
-        .switch-auth a { color: var(--text-color); font-weight: 700; text-decoration: none; }
-        #message { margin-top: 15px; text-align: center; font-size: 0.85rem; padding: 10px; border-radius: 8px; display: none; font-weight:600;}
-    </style>
+    <script defer src="./main.js"></script>
 </head>
 <body>
     <a href="index.html" class="btn-back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Quay về</a>
@@ -46,77 +25,5 @@
         <div id="message"></div>
         <div class="switch-auth">Đã có tài khoản? <a href="dangNhap.html">Đăng nhập ngay</a></div>
     </div>
-
-    <script>
-        const showMsg = (text, type) => {
-            const msg = document.getElementById('message');
-            msg.style.display = 'block';
-            msg.style.color = type === 'error' ? '#ff4444' : '#00c851';
-            msg.style.background = type === 'error' ? 'rgba(255, 68, 68, 0.1)' : 'rgba(0, 200, 81, 0.1)';
-            msg.innerText = text;
-        };
-
-        const clearErrors = () => { document.querySelectorAll('input').forEach(i => i.classList.remove('error')); };
-        const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        const validatePhone = (phone) => /^(0[3|5|7|8|9])+([0-9]{8})$/.test(phone); // Chuẩn VN 10 số
-
-        document.getElementById('registerForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            clearErrors();
-            
-            const inputs = {
-                name: document.getElementById('name'),
-                email: document.getElementById('email'),
-                phone: document.getElementById('phone'),
-                username: document.getElementById('username'),
-                password: document.getElementById('password')
-            };
-
-            const userData = {
-                name: inputs.name.value.trim(),
-                email: inputs.email.value.trim(),
-                phone: inputs.phone.value.trim(),
-                username: inputs.username.value.trim(),
-                password: inputs.password.value,
-                role: "user"
-            };
-
-            // Form Validation
-            if (!userData.name) { inputs.name.classList.add('error'); return showMsg("Vui lòng nhập họ tên!", "error"); }
-            if (!validateEmail(userData.email)) { inputs.email.classList.add('error'); return showMsg("Email không hợp lệ!", "error"); }
-            if (!validatePhone(userData.phone)) { inputs.phone.classList.add('error'); return showMsg("SĐT gồm 10 số & bắt đầu bằng 0!", "error"); }
-            if (!userData.username || userData.username.includes(" ")) { inputs.username.classList.add('error'); return showMsg("Tên đăng nhập không được chứa khoảng trắng!", "error"); }
-            if (userData.password.length < 6) { inputs.password.classList.add('error'); return showMsg("Mật khẩu tối thiểu 6 ký tự!", "error"); }
-
-            try {
-                const check = await fetch(`http://localhost:3000/users?username=${encodeURIComponent(userData.username)}`);
-                const exists = await check.json();
-                
-                if (exists.length > 0) {
-                    inputs.username.classList.add('error');
-                    return showMsg("Tên đăng nhập đã tồn tại!", "error");
-                }
-
-                const response = await fetch('http://localhost:3000/users', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(userData)
-                });
-
-                if (response.ok) {
-                    showMsg("Đăng ký thành công! Đang chuyển hướng...", "success");
-                    setTimeout(() => window.location.href = 'dangNhap.html', 500);
-                }
-            } catch (err) {
-                let localUsers = JSON.parse(localStorage.getItem('local_users')) || [];
-                localUsers.push(userData);
-                localStorage.setItem('local_users', JSON.stringify(localUsers));
-                showMsg("Đăng ký thành công (Offline mode).", "success");
-                setTimeout(() => window.location.href = 'dangNhap.html', 500);
-            }
-        });
-
-        if (localStorage.getItem('theme') === 'dark') document.body.setAttribute('data-theme', 'dark');
-    </script>
 </body>
 </html>
