@@ -1,4 +1,3 @@
-// 1. THEME TOGGLE (Chạy ngay lập tức để tránh chớp màn hình)
 const applyTheme = (theme) => {
     if (theme === 'dark') document.body.setAttribute('data-theme', 'dark');
     else document.body.removeAttribute('data-theme');
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. HAMBURGER MENU
+    // HAMBURGER MENU
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileOverlay = document.getElementById('mobile-overlay');
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', toggleMenu);
     });
 
-    // 3. AUTHENTICATION & HEADER ĐỘNG
+    // AUTHENTICATION & HEADER ĐỘNG
     checkAuth();
 
     // 4. ROUTER - GỌI HÀM THEO TRANG
