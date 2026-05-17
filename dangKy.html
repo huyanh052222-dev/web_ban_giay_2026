@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNEAKER X - Đăng ký</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color: #ffffff; --text-color: #1a1a1a; --secondary-bg: #f5f5f7; }
+        [data-theme="dark"] { --bg-color: #050505; --text-color: #f5f5f7; --secondary-bg: #151515; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { background: var(--bg-color); color: var(--text-color); display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; transition: 0.3s; position: relative; }
+        
+        .btn-back {
+            position: absolute; top: 40px; left: 5%;
+            text-decoration: none; color: var(--text-color);
+            font-size: 0.85rem; font-weight: 600;
+            display: flex; align-items: center; gap: 8px;
+            opacity: 0.6; transition: 0.3s;
+        }
+        .btn-back:hover { opacity: 1; transform: translateX(-5px); }
+
+        .auth-card { background: var(--bg-color); border: 1px solid rgba(128,128,128,0.1); padding: 50px; border-radius: 30px; width: 100%; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
+        .logo { font-weight: 800; font-size: 1.5rem; text-align: center; margin-bottom: 30px; display: block; text-decoration: none; color: var(--text-color); }
+        h2 { font-size: 1.5rem; margin-bottom: 30px; text-align: center; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; opacity: 0.7; }
+        input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(128,128,128,0.2); background: var(--secondary-bg); color: var(--text-color); outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--text-color); }
+        .btn-submit { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--text-color); color: var(--bg-color); font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        .btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+        
+        .switch-auth { text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.7; }
+        .switch-auth a { color: var(--text-color); font-weight: 700; text-decoration: none; }
+        #message { margin-top: 15px; text-align: center; font-size: 0.85rem; padding: 10px; border-radius: 8px; display: none; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Quay về trang chủ
+    </a>
+
+    <div class="auth-card">
+        <a href="index.html" class="logo">SNEAKER X</a>
+        <h2>Đăng ký thành viên</h2>
+        <form id="registerForm">
+            <div class="form-group"><label>Tên hiển thị</label><input type="text" id="name" required placeholder="Họ và tên của bạn"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="email" required placeholder="example@gmail.com"></div>
+            <div class="form-group"><label>Số điện thoại</label><input type="tel" id="phone" required placeholder="09xx xxx xxx"></div>
+            <div class="form-group"><label>Tên đăng nhập</label><input type="text" id="username" required placeholder="Tên để đăng nhập"></div>
+            <div class="form-group"><label>Mật khẩu</label><input type="password" id="password" required placeholder="••••••••"></div>
+            <button type="submit" class="btn-submit">TẠO TÀI KHOẢN</button>
+        </form>
+        <div id="message"></div>
+        <div class="switch-auth">Đã có tài khoản? <a href="dangNhap.html">Đăng nhập ngay</a></div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const msg = document.getElementById('message');
+            
+            // Lấy dữ liệu và làm sạch khoảng trắng
+            const userData = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                username: document.getElementById('username').value.trim(),
+                password: document.getElementById('password').value // Không trim password
+            };
+
+            try {
+                // Kiểm tra xem username đã tồn tại chưa
+                const check = await fetch(`http://localhost:3000/users?username=${encodeURIComponent(userData.username)}`);
+                const exists = await check.json();
+                
+                if (exists.length > 0) {
+                    msg.style.display = 'block'; msg.style.color = '#ff4444'; msg.innerText = "Tên đăng nhập đã tồn tại!";
+                    return;
+                }
+
+                // Lưu user mới vào json-server
+                const response = await fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+
+                if (response.ok) {
+                    msg.style.display = 'block'; msg.style.color = '#00c851'; msg.innerText = "Đăng ký thành công! Đang chuyển hướng...";
+                    setTimeout(() => window.location.href = 'dangNhap.html', 500); // Chuyển trang sau 0.5s
+                }
+            } catch (err) {
+                let localUsers = JSON.parse(localStorage.getItem('local_users')) || [];
+                localUsers.push(userData);
+                localStorage.setItem('local_users', JSON.stringify(localUsers));
+                msg.style.display = 'block'; msg.style.color = '#ffbb33'; msg.innerText = "Đăng ký thành công (Offline mode). Đang chuyển hướng...";
+                setTimeout(() => window.location.href = 'dangNhap.html', 500);
+            }
+        });
+
+        // Áp dụng theme
+        if (localStorage.getItem('theme') === 'dark') document.body.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+</html>

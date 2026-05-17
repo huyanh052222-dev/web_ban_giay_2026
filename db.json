@@ -1,0 +1,138 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Speed Runner Elite",
+      "category": "Running",
+      "price": 3500000,
+      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800",
+      "sizes": [
+        29,
+        31
+      ],
+      "description": "Được mệnh danh là 'đôi cánh của đôi chân', Speed Runner Elite sở hữu công nghệ đệm khí Carbon giúp hoàn trả 90% năng lượng trong mỗi bước chạy."
+    },
+    {
+      "id": "2",
+      "name": "Urban Flex 360",
+      "category": "Running",
+      "price": 1800000,
+      "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&q=80&w=800",
+      "sizes": [
+        29,
+        31
+      ],
+      "description": "Sự giao thoa hoàn hảo giữa phong cách đường phố và hiệu năng thể thao."
+    },
+    {
+      "id": "3",
+      "name": "Trail Master Pro",
+      "category": "Outdoor",
+      "price": 3200000,
+      "image": "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=800",
+      "sizes": [
+        29,
+        31
+      ],
+      "description": "Chinh phục những cung đường khắc nghiệt nhất với đế cao su gai địa hình siêu bám."
+    },
+    {
+      "id": "4",
+      "name": "Summit Peak Hiker",
+      "category": "Outdoor",
+      "price": 2800000,
+      "image": "https://images.unsplash.com/photo-1520639889456-473512111246?auto=format&fit=crop&q=80&w=800",
+      "sizes": [
+        29,
+        31,
+        35,
+        41
+      ],
+      "description": "Thiết kế cổ cao hỗ trợ cổ chân tối đa cùng lớp phủ chống thấm Gore-Tex."
+    },
+    {
+      "id": "5",
+      "name": "Midnight Racer X",
+      "category": "Combined",
+      "price": 4500000,
+      "image": "https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&q=80&w=800",
+      "sizes": [
+        29,
+        31,
+        35,
+        41
+      ],
+      "description": "Phiên bản giới hạn dành cho những tín đồ của bóng đêm với họa tiết phản quang độc quyền."
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123",
+      "name": "Admin Manager",
+      "email": "admin@sneakerx.com"
+    },
+    {
+      "name": "Huy",
+      "email": "huyanh052222@gmail.com",
+      "username": "Huy",
+      "password": "123123",
+      "id": "RY4vbhZd5-U"
+    },
+    {
+      "name": "Huy Lý",
+      "email": "huyanh052222@gmail.com",
+      "username": "123123",
+      "password": "123123",
+      "id": "VOnFYAgG8c8"
+    }
+  ],
+  "orders": [
+    {
+      "userId": "1",
+      "items": [
+        {
+          "id": 1779014231301.6943,
+          "name": "Urban Flex 360",
+          "price": 1800000,
+          "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&q=80&w=800",
+          "size": "31"
+        }
+      ],
+      "total": 1800000,
+      "date": "2026-05-17T10:40:21.674Z",
+      "id": "rPMdAhzOBQk"
+    },
+    {
+      "userId": "RY4vbhZd5-U",
+      "items": [
+        {
+          "id": 1779015704598.5579,
+          "name": "Speed Runner Elite",
+          "price": 3500000,
+          "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800",
+          "size": "31"
+        },
+        {
+          "id": 1779017096800.5542,
+          "name": "Speed Runner Elite",
+          "price": 3500000,
+          "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800",
+          "size": "31"
+        },
+        {
+          "id": 1779017102710.6614,
+          "name": "Urban Flex 360",
+          "price": 1800000,
+          "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&q=80&w=800",
+          "size": "31"
+        }
+      ],
+      "total": 8800000,
+      "date": "2026-05-17T11:29:13.313Z",
+      "id": "ZtmNKbFJeHY"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
