@@ -86,20 +86,21 @@
 
     <div id="product-modal" class="modal-overlay">
         <div class="modal-content">
-            <button class="modal-close">&times;</button>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
             <div class="modal-left" id="modal-img-container"></div>
             <div class="modal-right">
                 <span class="m-category" id="m-category">Category</span>
                 <h2 class="m-title" id="m-title">Name</h2>
                 <p class="m-price" id="m-price">0đ</p>
-                <p id="m-desc">Description...</p>
-                <h4 id="size-label">CHỌN KÍCH CỠ</h4>
+                <p id="m-desc" class="m-desc-text">Description...</p>
+                <h4 id="size-label" class="m-size-label">CHỌN KÍCH CỠ</h4>
                 <div class="m-sizes" id="m-sizes-container"></div>
-                <button class="btn-modal btn-buy-now" id="buy-now-btn">MUA NGAY</button>
-                <button class="btn-modal btn-add-cart" id="add-to-cart-btn">THÊM VÀO GIỎ</button>
+                <button class="btn-modal btn-buy-now" id="buy-now-btn" onclick="addToCartAction(true)">MUA NGAY</button>
+                <button class="btn-modal btn-add-cart" id="add-to-cart-btn" onclick="addToCartAction(false)">THÊM VÀO GIỎ</button>
             </div>
         </div>
     </div>
+
 
     <footer>
         <div class="footer-container">
