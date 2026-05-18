@@ -79,21 +79,21 @@ function checkAuth() {
 
     if (isLoggedIn && localUser) {
         if(authDiv) authDiv.innerHTML = `
-            <a href="nguoiDung.html" class="btn-auth" style="margin-right: 15px;">Xin chào, ${localUser.name || localUser.username}</a>
+            <a href="../pages/nguoiDung.html" class="btn-auth" style="margin-right: 15px;">Xin chào, ${localUser.name || localUser.username}</a>
             <button onclick="logout()" class="btn-auth" style="color: #ff4444; border:none; background:none;">Đăng xuất</button>
         `;
         if(mobileAuthDiv) mobileAuthDiv.innerHTML = `
-            <a href="nguoiDung.html" class="btn-auth" style="font-size: 1.2rem; font-weight:700;">Hồ sơ: ${localUser.name || localUser.username}</a>
+            <a href="../pages/nguoiDung.html" class="btn-auth" style="font-size: 1.2rem; font-weight:700;">Hồ sơ: ${localUser.name || localUser.username}</a>
             <button onclick="logout()" class="btn-auth" style="color: #ff4444; border:none; background:none; font-size:1.1rem; margin-top:10px; padding:0;">Đăng xuất</button>
         `;
     } else {
         if(authDiv) authDiv.innerHTML = `
-            <a href="dangNhap.html" class="btn-auth">Đăng nhập</a>
-            <a href="dangKy.html" class="btn-register">Đăng ký</a>
+            <a href="../pages/dangNhap.html" class="btn-auth">Đăng nhập</a>
+            <a href="../pages/dangKy.html" class="btn-register">Đăng ký</a>
         `;
         if(mobileAuthDiv) mobileAuthDiv.innerHTML = `
-            <a href="dangNhap.html" class="btn-auth">Đăng nhập</a>
-            <a href="dangKy.html" class="btn-register">Đăng ký</a>
+            <a href="../pages/dangNhap.html" class="btn-auth">Đăng nhập</a>
+            <a href="../pages/dangKy.html" class="btn-register">Đăng ký</a>
         `;
     }
 
@@ -667,7 +667,7 @@ function initLogin() {
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem('user', JSON.stringify({ ...data[0], name: data[0].name || data[0].username }));
                     msg.style.display = 'block'; msg.style.color = '#00c851'; msg.innerText = "Đăng nhập thành công!";
-                    setTimeout(() => window.location.href = 'index.html', 1000);
+                    setTimeout(() => window.location.href = '../index.html', 1000);
                 } else {
                     pInput.classList.add('error');
                     msg.style.display = 'block'; msg.style.color = '#ff4444'; msg.innerText = "Sai mật khẩu, vui lòng thử lại!";
@@ -678,11 +678,11 @@ function initLogin() {
                 if (found && found.password === p) {
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem('user', JSON.stringify({ ...found, name: found.name || found.username }));
-                    window.location.href = 'index.html';
+                    setTimeout(() => window.location.href = '../index.html', 1000);
                 } else if (u === 'admin' && p === '123') { 
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem('user', JSON.stringify({ name: 'Admin Manager', username: 'admin', role: 'admin' }));
-                    window.location.href = 'index.html';
+                    setTimeout(() => window.location.href = '../index.html', 1000);
                 } else {
                     uInput.classList.add('error');
                     msg.style.display = 'block'; msg.style.color = '#ff4444'; msg.innerText = "Tài khoản không tồn tại!";
@@ -692,7 +692,7 @@ function initLogin() {
             if (u === 'admin' && p === '123') { 
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('user', JSON.stringify({ name: 'Admin Manager', username: 'admin', role: 'admin' }));
-                window.location.href = 'index.html';
+                setTimeout(() => window.location.href = '../index.html', 1000);
             } else {
                 msg.style.display = 'block'; msg.style.color = '#ff4444'; msg.innerText = "Lỗi kết nối Server!";
             }
@@ -733,14 +733,14 @@ function initRegister() {
             });
             if (response.ok) {
                 msg.style.display='block'; msg.style.color='#00c851'; msg.innerText="Đăng ký thành công! Đang chuyển hướng...";
-                setTimeout(() => window.location.href = 'dangNhap.html', 500);
+                setTimeout(() => window.location.href = '../pages/dangNhap.html', 500);
             }
         } catch (err) {
             let localUsers = JSON.parse(localStorage.getItem('local_users')) || [];
             localUsers.push(userData);
             localStorage.setItem('local_users', JSON.stringify(localUsers));
             msg.style.display='block'; msg.style.color='#00c851'; msg.innerText="Đăng ký thành công (Offline mode).";
-            setTimeout(() => window.location.href = 'dangNhap.html', 500);
+            setTimeout(() => window.location.href = '../pages/dangNhap.html', 500);
         }
     });
 }
