@@ -91,6 +91,15 @@
       "password": "123123",
       "role": "user",
       "id": "r3Vwi6kYC2M"
+    },
+    {
+      "name": "Huy 234",
+      "email": "huyanh052222@gmail.com",
+      "phone": "0987654321",
+      "username": "Huy234",
+      "password": "123123",
+      "role": "user",
+      "id": "Y-g7r9DndvQ"
     }
   ],
   "orders": [
@@ -108,6 +117,21 @@
       "total": 2500000,
       "date": "2026-05-17T14:26:38.023Z",
       "id": "oho0u-WZ4ws"
+    },
+    {
+      "userId": "a9-1JIFz_iA",
+      "items": [
+        {
+          "id": "17798863841230.0770916990807341",
+          "name": "Speed Runner Elite",
+          "price": 2500000,
+          "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800",
+          "size": "31"
+        }
+      ],
+      "total": 2500000,
+      "date": "2026-05-27T12:53:33.299Z",
+      "id": "B7SQ4J1HhOk"
     }
   ],
   "bookings": [
@@ -119,6 +143,15 @@
       "status": "read",
       "createdAt": "2026-05-17T12:54:49.468Z",
       "id": "Q_fuk8NnUDA"
+    },
+    {
+      "name": "Ly Anh Huy",
+      "phone": "0768765123",
+      "date": "2026-12-12",
+      "style": "Running",
+      "status": "read",
+      "createdAt": "2026-05-27T12:54:00.412Z",
+      "id": "RlO0vGwXDNY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

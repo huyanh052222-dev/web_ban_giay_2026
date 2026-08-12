@@ -104,7 +104,7 @@ function checkAuth() {
         if (communityCard) {
             const desc = communityCard.querySelector('p');
             if (desc) desc.innerText = "Cảm ơn bạn đã trở thành hội viên đặc quyền của SNEAKER X.";
-            joinBtn.innerText = "ĐÃ GIA NHẬP";
+            // joinBtn.innerText = "ĐÃ GIA NHẬP";
             joinBtn.href = "javascript:void(0)";
             joinBtn.style.background = "transparent";
             joinBtn.style.border = "1px solid var(--text-color)";
